@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Rock-paper-scissor</title>
+		<link href="assets/css/style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<main class="main">
+			<h1 class="heading-main">Hand Gestures Showdown</h1>
+			<div class="container flex">
+				<div class="container-box">
+					<h3 class="box-heading" id="player-name">You</h3>
+					<p class="score">Score:<span id="score-player">0</span></p>
+					<p id="rps-output-player">?</p>
+				</div>
+				<div class="container-box">
+					<h3 class="box-heading">Computer</h3>
+					<p class="score">
+						Score:<span id="score-computer">0</span>
+					</p>
+					<div id="rps-output-computer">?</div>
+				</div>
+			</div>
+			<div class="rps">
+				<p class="options-box">
+					Choose an option here to start the game.
+				</p>
+				<div class="rps-input flex">
+					<div class="rock">
+						<img
+							src="assets/img/rock.jpg"
+							alt="Rock"
+							class="img"
+							id="rock-img"
+						/>
+					</div>
+					<div class="paper">
+						<img
+							src="assets/img/paper.jpg"
+							alt="Paper"
+							class="img"
+							id="paper-img"
+						/>
+					</div>
+					<div class="scissor">
+						<img
+							src="assets/img/Scissors.jpg"
+							alt="Scissors"
+							class="img"
+							id="scissors-img"
+						/>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="assets/js/script.js"></script>
+	</body>
+</html>
