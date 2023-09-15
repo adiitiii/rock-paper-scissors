@@ -1,7 +1,6 @@
 "use strict";
 
 // let playerName = prompt("Enter your Name: ");
-let playerSelection = "";
 
 function getComputerChoice() {
 	const num = Math.trunc(Math.random() * 3);
@@ -20,48 +19,37 @@ function getComputerChoice() {
 
 const computerSelection = getComputerChoice();
 
-function getPLayerChoice(callback) {
+const playerOutput = document.querySelector("#rps-output-player");
+// console.log(playerOutput);
+const compOutput = document.getElementById("rps-output-computer");
+// console.log(compOutput);
+
+function getPLayerChoice() {
 	const rockOption = document.getElementById("rock-img");
 	const paperOption = document.getElementById("paper-img");
 	const scissorOption = document.getElementById("scissors-img");
+	let playerChoice = "";
 
 	// If any image is clicked, set player selection and get computer selection
 	rockOption.addEventListener("click", function () {
-		playerSelection = "✊";
-		document.getElementById("rps-output-player").textContent =
-			playerSelection;
-		const computerSelection = getComputerChoice(); // Get computer's choice
-		document.getElementById("rps-output-computer").textContent =
-			computerSelection;
-		callback(playerSelection, computerSelection);
+		playerChoice = playerOutput.textContent = "✊";
 	});
 
 	paperOption.addEventListener("click", function () {
-		playerSelection = "✋";
-		document.getElementById("rps-output-player").textContent =
-			playerSelection;
-		const computerSelection = getComputerChoice(); // Get computer's choice
-		document.getElementById("rps-output-computer").textContent =
-			computerSelection;
-		callback(playerSelection, computerSelection);
+		playerChoice = playerOutput.textContent = "✋";
 	});
 
 	scissorOption.addEventListener("click", function () {
-		playerSelection = "✌";
-		document.getElementById("rps-output-player").textContent =
-			playerSelection;
-		const computerSelection = getComputerChoice(); // Get computer's choice
-		document.getElementById("rps-output-computer").textContent =
-			computerSelection;
-		callback(playerSelection, computerSelection);
+		playerChoice = playerOutput.textContent = "✌";
 	});
+
+	return playerChoice;
+	console.log("i returned", playerChoice);
 }
 
-// Usage:
-getPLayerChoice(function (playerSelection, computerSelection) {
-	console.log("Player Selection:", playerSelection);
-	console.log("Computer Selection:", computerSelection);
-});
+getPLayerChoice();
+
+/*
 
 //Function playRound
 
