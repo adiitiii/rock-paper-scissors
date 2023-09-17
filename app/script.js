@@ -1,142 +1,168 @@
-"use strict";
+'use strict';
 
 // let playerName = prompt("Enter your Name: ");
 
+let playerSelection = '';
+let playing = true;
+
 function getComputerChoice() {
-	const num = Math.trunc(Math.random() * 3);
-	let computerSelection = "";
+    if (playing) {
+        const num = Math.trunc(Math.random() * 3);
+        let computerSelection = '';
 
-	if (num === 0) {
-		computerSelection = "✊";
-	} else if (num === 1) {
-		computerSelection = "🤚";
-	} else {
-		computerSelection = "✌";
-	}
+        if (num === 0) {
+            computerSelection = '✊';
+        } else if (num === 1) {
+            computerSelection = '🤚';
+        } else {
+            computerSelection = '✌';
+        }
 
-	return computerSelection;
+        return computerSelection;
+    }
 }
 
 const computerSelection = getComputerChoice();
+// //Function playRound
 
-const playerOutput = document.querySelector("#rps-output-player");
-// console.log(playerOutput);
-const compOutput = document.getElementById("rps-output-computer");
-// console.log(compOutput);
+const playRound = function (playerChoice, computerChoice) {
+    if (playing) {
+        // Check for Rock✊ and Paper✋
+        if (playerChoice === '✊' && computerChoice === '✋') {
+            return [
+                {
+                    winningMessage: 'You Lose! Paper beats Rock',
+                    winner: 'computer',
+                },
+            ];
+        } else if (playerChoice === '✋' && computerChoice === '✊') {
+            return [
+                {
+                    winningMessage: 'You Won! Paper beats Rock',
+                    winner: 'player',
+                },
+            ];
+        }
 
-function getPLayerChoice() {
-	const rockOption = document.getElementById("rock-img");
-	const paperOption = document.getElementById("paper-img");
-	const scissorOption = document.getElementById("scissors-img");
-	let playerChoice = "";
+        // Check for Rock✊ and Scissors✌
+        else if (playerChoice === '✊' && computerChoice === '✌') {
+            return [
+                {
+                    winningMessage: 'You Won! Rock beats Scissors',
+                    winner: 'player',
+                },
+            ];
+        } else if (playerChoice === '✌' && computerChoice === '✊') {
+            return [
+                {
+                    winningMessage: 'You Lose! Rock beats Scissors',
+                    winner: 'computer',
+                },
+            ];
+        }
 
-	// If any image is clicked, set player selection and get computer selection
-	rockOption.addEventListener("click", function () {
-		playerChoice = playerOutput.textContent = "✊";
-	});
+        // Check for Paper✋ and Scissors✌
+        else if (playerChoice === '✋' && computerChoice === '✌') {
+            return [
+                {
+                    winningMessage: 'You Lose! Scissors beats Paper',
+                    winner: 'computer',
+                },
+            ];
+        } else if (playerChoice === '✌' && computerChoice === '✋') {
+            return [
+                {
+                    winningMessage: 'You Won! Scissors beats Paper',
+                    winner: 'player',
+                },
+            ];
+        }
 
-	paperOption.addEventListener("click", function () {
-		playerChoice = playerOutput.textContent = "✋";
-	});
+        // If both have same signs
+        else {
+            return [
+                {
+                    winningMessage: 'Game tied!',
+                    winner: 'tied',
+                },
+            ];
+        }
+    }
+};
 
-	scissorOption.addEventListener("click", function () {
-		playerChoice = playerOutput.textContent = "✌";
-	});
+let gameCount = 0;
+let playerWinningCount = 0;
+let computerWinningCount = 0;
+const optionsPlayerHave = document.querySelectorAll('.options__box');
+optionsPlayerHave.forEach((option) => {
+    option.addEventListener('click', () => {
+        const computerChoiceEl = document.getElementById('rps-output-computer');
+        const computerSelection = getComputerChoice();
+        const currentGameUpdate = document.querySelectorAll('.updateMessage');
+        const currentPlayerScore = document.getElementById('score-player');
+        const currentComputerScore = document.getElementById('score-computer');
 
-	return playerChoice;
-	console.log("i returned", playerChoice);
-}
+        computerChoiceEl.textContent = computerSelection;
 
-getPLayerChoice();
+        //Incrementing gameCount by 1
+        gameCount++;
 
-/*
+        if (gameCount <= 5) {
+            let [currentResults] = playRound(
+                playerSelection,
+                computerSelection
+            );
+            let currentWinner = currentResults.winner;
+            let currentWinningMessage = currentResults.winningMessage;
 
-//Function playRound
+            if (currentWinningMessage !== 'Game Tied!') {
+                currentGameUpdate.textContent = currentWinningMessage;
+                currentGameUpdate.style.backgroundColor = '#f8e700;';
+                currentGameUpdate.style.Color = '#fff;';
+                if (currentWinner === 'player') {
+                    playerWinningCount++;
+                    currentPlayerScore.textContent = playerWinningCount;
+                } else if (currentWinner === 'computer') {
+                    computerWinningCount++;
+                    currentComputerScore.textContent = computerWinningCount;
+                }
+            } else {
+                currentGameUpdate.textContent = currentWinningMessage;
+            }
+        } else {
+            if (playerWinningCount > computerWinningCount) {
+                currentGameUpdate.textContent = 'GAME OVER! Congrats you won.';
+                currentGameUpdate.style.playing = false;
+            }
+        }
+    });
+});
 
-function playRound(playerSelection, computerSelection) {
-	// Check for Rock✊ and Paper✋
-	if (playerSelection === "✊" && computerSelection === "✋") {
-		console.log("hello");
-		computerScore++;
-		return [
-			{
-				winningMessage: "You Lose! Paper beats Rock",
-				winner: "computer",
-			},
-		];
-	} else if (playerSelection === "🤚" && computerSelection === "✊") {
-		console.log("hello");
-		playerScore++;
-		return [
-			{
-				winningMessage: "You Won! Paper Beats Rock",
-				winner: "player",
-			},
-		];
-	}
+const rockOption = document.getElementById('✊');
+const paperOption = document.getElementById('🤚');
+const scissorOption = document.getElementById('✌');
+const playerChoiceEl = document.getElementById('rps-output-player');
 
-	//Check for "✊" and "✌"
-	else if (playerSelection === "✊" && computerSelection === "✌") {
-		console.log("hello");
-		playerScore++;
-		return [
-			{
-				winningMessage: "You Won! Rock Beats Scissors",
-				winner: "player",
-			},
-		];
-	} else if (playerSelection === "✌" && computerSelection === "✊") {
-		console.log("hello");
-		computerScore++;
-		return [
-			{
-				winningMessage: "You Lose! Rock Beats Scissors",
-				winner: "computer",
-			},
-		];
-	}
+rockOption.addEventListener('click', function () {
+    playRound('✊', computerSelection);
+    playerSelection = '✊';
+    console.log(playerSelection);
+    playerChoiceEl.textContent = playerSelection;
+});
 
-	//Check for "✌" and "🤚"
-	else if (playerSelection === "✌" && computerSelection === "🤚") {
-		console.log("hello");
-		playerScore++;
-		return [
-			{
-				winningMessage: "You Won! Scissors Beats Paper",
-				winner: "player",
-			},
-		];
-	} else if (playerSelection === "🤚" && computerSelection === "✌") {
-		console.log("hello");
-		computerScore++;
-		return [
-			{
-				winningMessage: "You Lose! Scissors Beats Paper",
-				winner: "computer",
-			},
-		];
-	}
+paperOption.addEventListener('click', function () {
+    playRound('🤚', computerSelection);
+    playerSelection = '🤚';
+    console.log(playerSelection);
+    playerChoiceEl.textContent = playerSelection;
+});
 
-	//If both have same signs
-	else {
-		return [
-			{
-				winningMessage: "Game Tied!",
-				winner: "tied",
-			},
-		];
-	}
-}
-
-const playGame = playRound(playerSelection, computerSelection);
-console.log(playGame);
-
-/*
-getComputerChoice();
-playRound(playerSelection, computerSelection);
-
-let computerScore = 0;
-let playerScore = 0;
+scissorOption.addEventListener('click', function () {
+    playRound('✌', computerSelection);
+    playerSelection = '✌';
+    console.log(playerSelection);
+    playerChoiceEl.textContent = playerSelection;
+});
 
 // const playerNameEl = document.getElementById("player-name");
 
@@ -145,19 +171,3 @@ let playerScore = 0;
 // } else {
 // 	document.querySelector("#player-name").textContent = playerName;
 // }
-
-
-const optionPlayerHave = document.querySelector(".rps");
-
-rockOption.addEventListener("click", function () {
-	playRound(rockOption, computerSelection);
-});
-
-paperOption.addEventListener("click", function () {
-	playRound(paperOption, computerSelection);
-});
-
-scissorOption.addEventListener("click", function () {
-	playRound(rockOption, computerSelection);
-});
-*/
