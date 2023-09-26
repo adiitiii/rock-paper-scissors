@@ -39,16 +39,16 @@ body {
     font-weight: 600;
 }
 
-#score-player,
-#score-computer {
+#player-score,
+#computer-score {
     margin-left: 1.2rem;
     font-size: 2rem;
     font-weight: 700;
     color: #fff;
 }
 
-#rps-output-computer,
-#rps-output-player {
+#player-choice,
+#computer-choice {
     color: #fff;
     font-size: 3.5rem;
     font-weight: 800;
@@ -56,15 +56,33 @@ body {
     margin-top: 0;
 }
 
-.options-box {
+.updates {
+    margin: 5.5rem 5rem 0 5rem;
+}
+
+.update-message {
+    text-align: center;
+    margin-top: 3rem;
+    /* color: #ec41d3; */
+    color: #000;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.update-winner {
+    text-align: center;
+    color: #ec41d3;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-top: 0;
+}
+
+.options {
     text-align: center;
     margin-top: 3rem;
     color: #ec41d3;
     font-size: 2.5rem;
     font-weight: 600;
-}
-
-.options__box {
     margin: 5.5rem 5rem 0 5rem;
     gap: 10%;
 }
@@ -79,8 +97,8 @@ body {
     transform: translateY(20px);
 }
 
-.rock,
+/* .rock,
 .paper,
 .scissor {
     overflow: hidden;
-}
+} */

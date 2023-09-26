@@ -12,27 +12,30 @@
             <div class="container flex">
                 <div class="container-box">
                     <h3 class="box-heading" id="player-name">You</h3>
-                    <p class="score">Score: <span id="score-player">0</span></p>
-                    <p id="rps-output-player">?</p>
+                    <p class="score">Score: <span id="player-score">0</span></p>
+                    <p id="player-choice">?</p>
                 </div>
                 <div class="container-box">
                     <h3 class="box-heading">Computer</h3>
                     <p class="score">
-                        Score: <span id="score-computer">0</span>
+                        Score: <span id="computer-score">0</span>
                     </p>
-                    <div id="rps-output-computer">?</div>
+                    <div id="computer-choice">?</div>
                 </div>
             </div>
             <div class="rps">
-                <p class="options-box updateMessage">
-                    Choose an option here to start the game.
-                </p>
-                <div class="options__box flex">
+                <div class="updates">
+                    <p class="update-message">
+                        Choose an option here to start the game.
+                    </p>
+                    <p class="update-winner">(First to score 5 wins!)</p>
+                </div>
+                <div class="options flex">
                     <div class="rock">
                         <img
                             src="assets/img/rock.jpg"
                             alt="Rock"
-                            class="img option__box"
+                            class="img option-rock"
                             id="✊"
                         />
                     </div>
@@ -40,7 +43,7 @@
                         <img
                             src="assets/img/paper.jpg"
                             alt="Paper"
-                            class="img option__box"
+                            class="img option-paper"
                             id="🤚"
                         />
                     </div>
@@ -48,7 +51,7 @@
                         <img
                             src="assets/img/Scissors.jpg"
                             alt="Scissors"
-                            class="img option__box"
+                            class="img option-scissor"
                             id="✌"
                         />
                     </div>
