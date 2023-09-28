@@ -1,5 +1,7 @@
 'use strict';
 
+let playing = true;
+
 const getComputerChoice = function () {
     const randNum = Math.floor(Math.random() * 3) + 1;
     let computerChoice = '';
@@ -18,6 +20,8 @@ const getComputerChoice = function () {
     return computerChoice;
 };
 
+let playerWinningCount = 0;
+let computerWinningCount = 0;
 const playRound = function (playerChoice, computerChoice) {
     //If both have same signs
     if (playerChoice === computerChoice) {
@@ -61,57 +65,200 @@ const playRound = function (playerChoice, computerChoice) {
 const rock = document.querySelector('.option-rock');
 const paper = document.querySelector('.option-paper');
 const scissor = document.querySelector('.option-scissor');
+let gameCount = 0;
 
 rock.addEventListener('click', function () {
-    const playerChoice = rock.getAttribute('id');
-    const computerChoice = getComputerChoice();
-    const playerChoiceEl = document.getElementById('player-choice');
-    const computerChoiceEl = document.getElementById('computer-choice');
+    if (playing) {
+        //Declaring variables
+        const playerChoice = rock.getAttribute('id');
+        const computerChoice = getComputerChoice();
+        const playerChoiceEl = document.getElementById('player-choice');
+        const computerChoiceEl = document.getElementById('computer-choice');
+        const updateMessage = document.querySelector('.update-message');
+        const updateWinner = document.querySelector('.update-winner');
+        const playerScore = document.getElementById('player-score');
+        const computerScore = document.getElementById('computer-score');
+        const gameOverBox = document.querySelector('.game-over-box');
+        const finalWinner = document.getElementById('final-winner');
+        //printing values
+        playerChoiceEl.textContent = playerChoice;
+        computerChoiceEl.textContent = computerChoice;
 
-    playerChoiceEl.textContent = playerChoice;
-    computerChoiceEl.textContent = computerChoice;
+        //applying conditionals
 
-    let [currentResults] = playRound(playerChoice, computerChoice);
-    let currentWinningMessage = currentResults.winningMessage;
-    let currentWinner = currentResults.winner;
+        if (gameCount <= 5) {
+            //results
+            let currentResults = playRound(playerChoice, computerChoice);
+            let currentWinningMessage = currentResults[0].winningMessage;
+            let currentWinner = currentResults[0].winner;
 
-    console.log('playRound script loaded');
-    console.log('Winner is:', currentWinner);
-    console.log('Message is:', currentWinningMessage);
+            //If game is tied, go into this statement
+            if (currentWinningMessage === 'tied') {
+                console.log('tied');
+                updateMessage.textContent = currentWinningMessage;
+            }
+
+            //If game is not tied, go into this statement
+            if (currentWinningMessage !== 'tied') {
+                updateMessage.textContent = currentWinningMessage;
+                updateWinner.style.fontSize = '3rem';
+                updateMessage.style.color = '#36cdba';
+                if (currentWinner === 'computer') {
+                    computerWinningCount++;
+                    console.log('computer score:', computerWinningCount);
+                    computerScore.textContent = computerWinningCount;
+                } else if (currentWinner === 'player') {
+                    playerWinningCount++;
+                    console.log('player score:', playerWinningCount);
+                    playerScore.textContent = playerWinningCount;
+                }
+
+                // Incrementing the game count with 1
+                gameCount++;
+                console.log('count:', gameCount);
+            }
+        } else if (gameCount === 5) {
+            playing = false;
+            if (playing) {
+                if (computerWinningCount > playerWinningCount) {
+                    finalWinner.textContent = 'Sorry you Lose';
+                    finalWinner.style.color = '#fa4f00';
+                    gameOverBox.style.display = 'flex';
+                } else {
+                    finalWinner.textContent = 'Congrats you Won';
+                    finalWinner.style.color = '#00fa85';
+                    gameOverBox.style.display = 'flex';
+                }
+            }
+        }
+    }
 });
 
 paper.addEventListener('click', function () {
-    const playerChoice = paper.getAttribute('id');
-    const computerChoice = getComputerChoice();
-    const playerChoiceEl = document.getElementById('player-choice');
-    const computerChoiceEl = document.getElementById('computer-choice');
+    if (playing) {
+        const playerChoice = paper.getAttribute('id');
+        const computerChoice = getComputerChoice();
+        const playerChoiceEl = document.getElementById('player-choice');
+        const computerChoiceEl = document.getElementById('computer-choice');
+        const updateMessage = document.querySelector('.update-message');
+        const updateWinner = document.querySelector('.update-winner');
+        const playerScore = document.getElementById('player-score');
+        const computerScore = document.getElementById('computer-score');
+        const gameOverBox = document.querySelector('.game-over-box');
+        const finalWinner = document.getElementById('final-winner');
 
-    playerChoiceEl.textContent = playerChoice;
-    computerChoiceEl.textContent = computerChoice;
+        //printing values
+        playerChoiceEl.textContent = playerChoice;
+        computerChoiceEl.textContent = computerChoice;
 
-    let [currentResults] = playRound(playerChoice, computerChoice);
-    let currentWinningMessage = currentResults.winningMessage;
-    let currentWinner = currentResults.winner;
+        if (gameCount <= 5) {
+            //results
+            let currentResults = playRound(playerChoice, computerChoice);
+            let currentWinningMessage = currentResults[0].winningMessage;
+            let currentWinner = currentResults[0].winner;
 
-    console.log('playRound script loaded');
-    console.log('Winner is:', currentWinner);
-    console.log('Message is:', currentWinningMessage);
+            //If game is tied, go into this statement
+            if (currentWinningMessage === 'tied') {
+                console.log('tied');
+                updateMessage.textContent = currentWinningMessage;
+            }
+
+            //If game is not tied, go into this statement
+            if (currentWinningMessage !== 'tied') {
+                updateMessage.textContent = currentWinningMessage;
+                updateWinner.style.fontSize = '3rem';
+                updateMessage.style.color = '#36cdba';
+                if (currentWinner === 'computer') {
+                    computerWinningCount++;
+                    console.log('computer score:', computerWinningCount);
+                    computerScore.textContent = computerWinningCount;
+                } else if (currentWinner === 'player') {
+                    playerWinningCount++;
+                    console.log('player score:', playerWinningCount);
+                    playerScore.textContent = playerWinningCount;
+                }
+
+                // Incrementing the game count with 1
+                gameCount++;
+                console.log('count:', gameCount);
+            }
+        } else if (gameCount === 5) {
+            playing = false;
+            if (playing) {
+                if (computerWinningCount > playerWinningCount) {
+                    finalWinner.textContent = 'Sorry you Lose';
+                    finalWinner.style.color = '#fa4f00';
+                    gameOverBox.style.display = 'flex';
+                } else {
+                    finalWinner.textContent = 'Congrats you Won';
+                    finalWinner.style.color = '#00fa85';
+                    gameOverBox.style.display = 'flex';
+                }
+            }
+        }
+    }
 });
 
 scissor.addEventListener('click', function () {
-    const playerChoice = scissor.getAttribute('id');
-    const computerChoice = getComputerChoice();
-    const playerChoiceEl = document.getElementById('player-choice');
-    const computerChoiceEl = document.getElementById('computer-choice');
+    if (playing) {
+        const playerChoice = scissor.getAttribute('id');
+        const computerChoice = getComputerChoice();
+        const playerChoiceEl = document.getElementById('player-choice');
+        const computerChoiceEl = document.getElementById('computer-choice');
+        const updateMessage = document.querySelector('.update-message');
+        const updateWinner = document.querySelector('.update-winner');
+        const playerScore = document.getElementById('player-score');
+        const computerScore = document.getElementById('computer-score');
+        const gameOverBox = document.querySelector('.game-over-box');
+        const finalWinner = document.getElementById('final-winner');
+        //printing values
+        playerChoiceEl.textContent = playerChoice;
+        computerChoiceEl.textContent = computerChoice;
 
-    playerChoiceEl.textContent = playerChoice;
-    computerChoiceEl.textContent = computerChoice;
+        if (gameCount <= 5) {
+            //results
+            let currentResults = playRound(playerChoice, computerChoice);
+            let currentWinningMessage = currentResults[0].winningMessage;
+            let currentWinner = currentResults[0].winner;
 
-    let [currentResults] = playRound(playerChoice, computerChoice);
-    let currentWinningMessage = currentResults.winningMessage;
-    let currentWinner = currentResults.winner;
+            //If game is tied, go into this statement
+            if (currentWinningMessage === 'tied') {
+                console.log('tied');
+                updateMessage.textContent = currentWinningMessage;
+            }
 
-    console.log('playRound script loaded');
-    console.log('Winner is:', currentWinner);
-    console.log('Message is:', currentWinningMessage);
+            //If game is not tied, go into this statement
+            if (currentWinningMessage !== 'tied') {
+                updateMessage.textContent = currentWinningMessage;
+                updateWinner.style.fontSize = '3rem';
+                updateMessage.style.color = '#36cdba';
+                if (currentWinner === 'computer') {
+                    computerWinningCount++;
+                    console.log('computer score:', computerWinningCount);
+                    computerScore.textContent = computerWinningCount;
+                } else if (currentWinner === 'player') {
+                    playerWinningCount++;
+                    console.log('player score:', playerWinningCount);
+                    playerScore.textContent = playerWinningCount;
+                }
+
+                // Incrementing the game count with 1
+                gameCount++;
+                console.log('count:', gameCount);
+            }
+        } else if (gameCount === 5) {
+            playing = false;
+            if (playing) {
+                if (computerWinningCount > playerWinningCount) {
+                    finalWinner.textContent = 'Sorry you Lose';
+                    finalWinner.style.color = '#fa4f00';
+                    gameOverBox.style.display = 'flex';
+                } else {
+                    finalWinner.textContent = 'Congrats you Won';
+                    finalWinner.style.color = '#00fa85';
+                    gameOverBox.style.display = 'flex';
+                }
+            }
+        }
+    }
 });
