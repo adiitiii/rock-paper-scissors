@@ -93,13 +93,13 @@ rock.addEventListener('click', function () {
             let currentWinner = currentResults[0].winner;
 
             //If game is tied, go into this statement
-            if (currentWinningMessage === 'tied') {
+            if (currentWinningMessage === 'Game tied!') {
                 console.log('tied');
                 updateMessage.textContent = currentWinningMessage;
             }
 
             //If game is not tied, go into this statement
-            if (currentWinningMessage !== 'tied') {
+            if (currentWinningMessage !== 'Game tied!') {
                 updateMessage.textContent = currentWinningMessage;
                 updateWinner.style.fontSize = '3rem';
                 updateMessage.style.color = '#36cdba';
@@ -117,9 +117,9 @@ rock.addEventListener('click', function () {
                 gameCount++;
                 console.log('count:', gameCount);
             }
-        } else if (gameCount === 5) {
+        } else if (gameCount === 6) {
             playing = false;
-            if (playing) {
+            if (playing === false) {
                 if (computerWinningCount > playerWinningCount) {
                     finalWinner.textContent = 'Sorry you Lose';
                     finalWinner.style.color = '#fa4f00';
@@ -131,6 +131,11 @@ rock.addEventListener('click', function () {
                 }
             }
         }
+
+        const playAgain = document.getElementById('play-again');
+        playAgain.addEventListener('click', function () {
+            location.reload();
+        });
     }
 });
 
@@ -158,13 +163,13 @@ paper.addEventListener('click', function () {
             let currentWinner = currentResults[0].winner;
 
             //If game is tied, go into this statement
-            if (currentWinningMessage === 'tied') {
+            if (currentWinningMessage === 'Game tied!') {
                 console.log('tied');
                 updateMessage.textContent = currentWinningMessage;
             }
 
             //If game is not tied, go into this statement
-            if (currentWinningMessage !== 'tied') {
+            if (currentWinningMessage !== 'Game tied!') {
                 updateMessage.textContent = currentWinningMessage;
                 updateWinner.style.fontSize = '3rem';
                 updateMessage.style.color = '#36cdba';
@@ -182,9 +187,9 @@ paper.addEventListener('click', function () {
                 gameCount++;
                 console.log('count:', gameCount);
             }
-        } else if (gameCount === 5) {
+        } else if (gameCount === 6) {
             playing = false;
-            if (playing) {
+            if (playing === false) {
                 if (computerWinningCount > playerWinningCount) {
                     finalWinner.textContent = 'Sorry you Lose';
                     finalWinner.style.color = '#fa4f00';
@@ -196,6 +201,11 @@ paper.addEventListener('click', function () {
                 }
             }
         }
+
+        const playAgain = document.getElementById('play-again');
+        playAgain.addEventListener('click', function () {
+            location.reload();
+        });
     }
 });
 
@@ -222,13 +232,13 @@ scissor.addEventListener('click', function () {
             let currentWinner = currentResults[0].winner;
 
             //If game is tied, go into this statement
-            if (currentWinningMessage === 'tied') {
+            if (currentWinningMessage === 'Game tied!') {
                 console.log('tied');
                 updateMessage.textContent = currentWinningMessage;
             }
 
             //If game is not tied, go into this statement
-            if (currentWinningMessage !== 'tied') {
+            if (currentWinningMessage !== 'Game tied!') {
                 updateMessage.textContent = currentWinningMessage;
                 updateWinner.style.fontSize = '3rem';
                 updateMessage.style.color = '#36cdba';
@@ -246,9 +256,9 @@ scissor.addEventListener('click', function () {
                 gameCount++;
                 console.log('count:', gameCount);
             }
-        } else if (gameCount === 5) {
+        } else if (gameCount === 6) {
             playing = false;
-            if (playing) {
+            if (playing === false) {
                 if (computerWinningCount > playerWinningCount) {
                     finalWinner.textContent = 'Sorry you Lose';
                     finalWinner.style.color = '#fa4f00';
@@ -260,5 +270,10 @@ scissor.addEventListener('click', function () {
                 }
             }
         }
+
+        const playAgain = document.getElementById('play-again');
+        playAgain.addEventListener('click', function () {
+            location.reload();
+        });
     }
 });
